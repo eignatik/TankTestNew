@@ -72,22 +72,30 @@ public class ModelDataApp {
         }
     }
 
-//    public static Tank getTank(int id) throws ValueException{
-//        if(id == 0) throw new ValueException(Integer.toString(id), " id is zero.");
-//        try(Connection connection = DriverManager.getConnection(URL, username, password); Statement statement = connection.createStatement()){
-//            ResultSet res = statement.executeQuery("SELECT * FROM tanklist WHERE id=" + id +";");
-//
-//            Tank tank = new Tank();
-//            while(res.next()){
-//                System.out.println(res.getString("tankname"));
-//            }
-//
-//        } catch (SQLException e){
-//            System.err.println(e.getMessage());
-//            e.printStackTrace();
-//        }
-//        return new Tank();
-//    }
+    public static Tank getTank(int id) throws ValueException{
+        if(id == 0) throw new ValueException(Integer.toString(id), " id is zero.");
+        Tank tank = new Tank();
+        try(Connection connection = DriverManager.getConnection(URL, username, password); Statement statement = connection.createStatement()){
+            ResultSet res = statement.executeQuery("SELECT * FROM tanklist WHERE id=" + id +";");
+            while(res.next()){
+                tank.setTankName(res.getString("tankname"));
+                tank.setCountry(res.getString("country"));
+                tank.setSpeed(res.getInt("speed"));
+                tank.setWeight(res.getInt("weight"));
+                tank.setViewRange(res.getInt("viewrange"));
+                tank.setSidesArm(res.getDouble("sidesarm"));
+                tank.setFrontArm(res.getDouble("frontarm"));
+                tank.setWeapCal(res.getDouble("weapcal"));
+                tank.setHasTower(res.getBoolean("hastower"));
+
+            }
+
+        } catch (SQLException e){
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return tank;
+    }
 
     public static HashMap<String, Tank> getTanks(){
         try(Connection connection = DriverManager.getConnection(URL, username, password); Statement statement = connection.createStatement()){
