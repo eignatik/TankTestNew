@@ -29,24 +29,11 @@ public abstract class Vehicle {
 
     @Override
     public boolean equals(Object inputTank){
-        if(inputTank == null) return false;
+        if(inputTank == null || getClass() != inputTank.getClass()) return false;
         if(inputTank == this) return true;
-        if(getClass() != inputTank.getClass()) return false;
         Tank tank = (Tank) inputTank;
-        if(this.getBackArm() == tank.getBackArm()){
-            if(this.getDegTurnTow() == tank.getDegTurnTow()){
-                if(this.getFrontArm() == tank.getFrontArm()){
-                    if(this.getSidesArm() == tank.getSidesArm()){
-                        if(this.getSpeed() == tank.getSpeed()){
-                            if(this.getViewRange() == tank.getViewRange()){
-                                if(this.getWeapCal() == tank.getWeapCal()){
-                                    if(this.getWeight() == tank.getWeight()) return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if(this.getBackArm() == tank.getBackArm() && this.getDegTurnTow() == tank.getDegTurnTow() && this.getFrontArm() == tank.getFrontArm() && this.getSidesArm() == tank.getSidesArm() && this.getSpeed() == tank.getSpeed() && this.getViewRange() == tank.getViewRange() && this.getWeapCal() == tank.getWeapCal() && this.getWeight() == tank.getWeight()){
+            return true;
         }
         return false;
     }
@@ -55,20 +42,8 @@ public abstract class Vehicle {
         if(inputTank == null) throw new Exception("The input Tank is null");
         if(inputTank == this) return 0;
         Tank tank = (Tank) inputTank;
-        if(this.getBackArm() == tank.getBackArm()){
-            if(this.getDegTurnTow() == tank.getDegTurnTow()){
-                if(this.getFrontArm() == tank.getFrontArm()){
-                    if(this.getSidesArm() == tank.getSidesArm()){
-                        if(this.getSpeed() == tank.getSpeed()){
-                            if(this.getViewRange() == tank.getViewRange()){
-                                if(this.getWeapCal() == tank.getWeapCal()){
-                                    if(this.getWeight() == tank.getWeight()) return 0;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if(tank.equals(this)){
+            return 0;
         }
         return -1;
     }
